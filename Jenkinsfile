@@ -50,5 +50,25 @@ spec:
         }
       }
     }
+    stage('Release') {
+      when {
+        anyOf {
+          changeset "docker/**"
+          changeset "Jenkinsfile"
+        }
+        allOf {
+          expression { env.BRANCH_NAME == "master" }
+        }
+      }
+      steps {
+        container (name: 'builder') {
+          withCredentials([usernamePassword(credentialsId: 'artifactory-datapwn-credentials', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_LOGIN')]) {
+            sh '''
+            printenv
+            '''
+          }
+        }
+      }
+    }
   }
 }

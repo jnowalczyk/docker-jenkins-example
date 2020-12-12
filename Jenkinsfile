@@ -44,7 +44,7 @@ spec:
         container (name: 'builder') {
           withCredentials([usernamePassword(credentialsId: 'artifactory-datapwn-credentials', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_LOGIN')]) {
             sh '''#!/bin/bash
-						set +x
+	    set +x
             cd docker/
             cat Dockerfile
             '''

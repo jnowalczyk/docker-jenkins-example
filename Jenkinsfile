@@ -43,10 +43,8 @@ spec:
       steps {
         container (name: 'builder') {
           withCredentials([usernamePassword(credentialsId: 'artifactory-datapwn-credentials', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_LOGIN')]) {
-            sh '''#!/bin/bash
+            sh '''
 						printenv
-            cd docker/
-            cat Dockerfile
             '''
           }
         }
